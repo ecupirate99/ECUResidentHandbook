@@ -3,10 +3,24 @@ import { WebhookResponse } from '../types';
 
 /**
  * Sends a question to the Make.com webhook.
- * We prioritize the environment variable for deployment flexibility.
+ * We safely check for process.env to avoid ReferenceErrors in browser environments.
  */
 const DEFAULT_URL = 'https://hook.us2.make.com/1ylj8ccfse5t7cp734yv3xwsexq46oez';
-const WEBHOOK_URL = process.env.WEBHOOK_URL || DEFAULT_URL;
+
+// Safely resolve the URL
+const getWebhookUrl = (): string => {
+  try {
+    // Check if process and process.env exist (typical in build-time replacement)
+    if (typeof process !== 'undefined' && process.env && process.env.WEBHOOK_URL) {
+      return process.env.WEBHOOK_URL;
+    }
+  } catch (e) {
+    // Fallback if process is not defined
+  }
+  return DEFAULT_URL;
+};
+
+const WEBHOOK_URL = getWebhookUrl();
 
 export const askHandbookQuestion = async (question: string): Promise<string> => {
   console.log(`[Webhook] Sending question: "${question}" to ${WEBHOOK_URL}`);
@@ -29,18 +43,12 @@ export const askHandbookQuestion = async (question: string): Promise<string> => 
 
     const contentType = response.headers.get("content-type");
     
-    // Attempt to parse as JSON if the header suggests it
     if (contentType && contentType.includes("application/json")) {
       const data: WebhookResponse = await response.json();
-      console.log('[Webhook] Received JSON response:', data);
-      
-      // Extract answer from common response keys used by Make.com modules
       return data.answer || data.text || data.response || data.message || JSON.stringify(data);
     } 
     
-    // Fallback to plain text if not JSON
     const text = await response.text();
-    console.log('[Webhook] Received text response:', text);
     return text || "No response text was provided by the handbook assistant.";
 
   } catch (error) {
