@@ -252,14 +252,14 @@ const App: React.FC = () => {
             )}
           </div>
 
-          <div className="p-4 bg-white border-t border-slate-100">
-            <div className="max-w-3xl mx-auto flex items-end gap-3 bg-slate-100 rounded-3xl p-3 px-5 focus-within:bg-white focus-within:ring-4 focus-within:ring-ecu-purple/10 border-2 border-transparent focus-within:border-ecu-purple transition-all">
+          <div className="p-2 md:p-4 bg-white border-t border-slate-100">
+            <div className="max-w-3xl mx-auto flex items-end gap-2 md:gap-3 bg-slate-100 rounded-3xl p-2 md:p-3 px-3 md:px-5 focus-within:bg-white focus-within:ring-4 focus-within:ring-ecu-purple/10 border-2 border-transparent focus-within:border-ecu-purple transition-all">
               <textarea
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSend())}
                 placeholder="Ask about dorm policies, move-in, etc..."
-                className="flex-1 bg-transparent border-none focus:ring-0 text-base py-3 px-1 resize-none max-h-40 min-h-[44px]"
+                className="flex-1 bg-transparent border-none focus:ring-0 text-base py-2 md:py-3 px-1 resize-none max-h-40 min-h-[44px]"
                 rows={1}
                 onInput={(e) => {
                   const t = e.target as HTMLTextAreaElement;
@@ -270,14 +270,14 @@ const App: React.FC = () => {
               <button 
                 onClick={() => handleSend()}
                 disabled={!inputValue.trim()}
-                className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-lg mb-1
+                className={`w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl flex items-center justify-center transition-all shadow-lg mb-1
                   ${inputValue.trim() ? 'bg-ecu-purple text-white hover:scale-105 active:scale-95' : 'bg-slate-300 text-slate-100 cursor-not-allowed'}
                 `}
               >
-                <i className="fas fa-paper-plane text-lg"></i>
+                <i className="fas fa-paper-plane text-base md:text-lg"></i>
               </button>
             </div>
-            <p className="text-xs text-center text-gray-400 mt-3 font-medium">Verify important information with Campus Living staff.</p>
+            <p className="text-[10px] md:text-xs text-center text-gray-400 mt-2 md:mt-3 font-medium">Verify important information with Campus Living staff.</p>
           </div>
         </main>
       </div>
