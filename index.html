@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECU Resident Handbook Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        /* ECU Colors */
+        .bg-ecu-purple { background-color: #592A8A; }
+        .text-ecu-purple { color: #592A8A; }
+        .bg-ecu-gold { background-color: #FEC923; }
+        .text-ecu-gold { color: #FEC923; }
+        .border-ecu-purple { border-color: #592A8A; }
+        .border-ecu-gold { border-color: #FEC923; }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #592A8A;
+            border-radius: 10px;
+        }
+
+        /* Markdown Content Styling */
+        .prose ul { list-style-type: disc; padding-left: 1.25rem; margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .prose li { margin-bottom: 0.25rem; }
+        .prose strong { color: #592A8A; font-weight: 700; }
+        .prose p { margin-bottom: 0.75rem; }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "uuid": "https://esm.sh/uuid@^13.0.0",
+    "react-markdown": "https://esm.sh/react-markdown@^9.0.1"
+  }
+}
+</script>
+</head>
+<body class="h-screen overflow-hidden">
+    <div id="root" class="h-full"></div>
+</body>
+</html>

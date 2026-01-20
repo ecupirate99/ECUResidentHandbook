@@ -1,0 +1,5 @@
+{
+  "name": "ECU Resident Handbook Assistant",
+  "description": "A dedicated chatbot for East Carolina University students to query the Fall 2024 Resident Handbook.",
+  "requestFramePermissions": []
+}
