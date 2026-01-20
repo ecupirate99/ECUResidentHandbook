@@ -3,15 +3,15 @@ import { WebhookResponse } from '../types';
 
 /**
  * Sends a question to the Make.com webhook.
- * Updated Webhook Address: hook.us2.make.com/1ylj8ccfse5t7cp734yv3xwsexq46oez
+ * We prioritize the environment variable for deployment flexibility.
  */
-const WEBHOOK_URL = 'https://hook.us2.make.com/1ylj8ccfse5t7cp734yv3xwsexq46oez';
+const DEFAULT_URL = 'https://hook.us2.make.com/1ylj8ccfse5t7cp734yv3xwsexq46oez';
+const WEBHOOK_URL = process.env.WEBHOOK_URL || DEFAULT_URL;
 
 export const askHandbookQuestion = async (question: string): Promise<string> => {
   console.log(`[Webhook] Sending question: "${question}" to ${WEBHOOK_URL}`);
   
   try {
-    // Ensuring the variable name is exactly 'question' as requested
     const payload = { question };
 
     const response = await fetch(WEBHOOK_URL, {
