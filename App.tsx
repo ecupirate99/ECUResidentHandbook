@@ -167,18 +167,18 @@ const App: React.FC = () => {
           <div className="flex-1 overflow-y-auto p-4 md:p-10 custom-scrollbar">
             {!activeMessage ? (
               <div className="h-full flex flex-col items-center justify-center text-center max-w-lg mx-auto">
-                <div className="w-20 h-20 bg-ecu-purple/10 rounded-3xl rotate-12 flex items-center justify-center text-ecu-purple mb-6">
-                  <i className="fas fa-book-open text-3xl -rotate-12"></i>
+                <div className="w-24 h-24 bg-ecu-purple/10 rounded-3xl rotate-12 flex items-center justify-center text-ecu-purple mb-8">
+                  <i className="fas fa-book-open text-4xl -rotate-12"></i>
                 </div>
-                <h2 className="text-2xl font-black text-ecu-purple mb-2 italic uppercase">Go Pirates!</h2>
-                <p className="text-sm text-gray-500 mb-8">Ask anything about the Fall 2024 Resident Handbook.</p>
+                <h2 className="text-3xl font-black text-ecu-purple mb-3 italic uppercase">Go Pirates!</h2>
+                <p className="text-lg text-gray-500 mb-10">Ask anything about the Fall 2024 Resident Handbook.</p>
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                   {SUGGESTIONS.map((s) => (
                     <button 
                       key={s} 
                       onClick={() => handleSend(s)}
-                      className="p-4 text-left text-xs font-bold text-gray-600 bg-white border-2 border-slate-100 rounded-2xl hover:border-ecu-gold hover:text-ecu-purple transition-all shadow-sm"
+                      className="p-5 text-left text-sm font-bold text-gray-600 bg-white border-2 border-slate-100 rounded-2xl hover:border-ecu-gold hover:text-ecu-purple transition-all shadow-sm"
                     >
                       {s}
                     </button>
@@ -188,17 +188,17 @@ const App: React.FC = () => {
             ) : (
               <div className="max-w-3xl mx-auto space-y-8 animate-in slide-in-from-bottom-4 duration-500">
                 <div className="flex justify-end">
-                  <div className="bg-ecu-purple text-white px-5 py-3 rounded-2xl rounded-tr-none shadow-lg max-w-[85%]">
-                    <p className="text-sm font-semibold">{activeMessage.question}</p>
+                  <div className="bg-ecu-purple text-white px-6 py-4 rounded-2xl rounded-tr-none shadow-lg max-w-[85%]">
+                    <p className="text-base font-semibold">{activeMessage.question}</p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-ecu-gold flex items-center justify-center shadow-sm">
-                      <i className="fas fa-robot text-ecu-purple text-xs"></i>
+                    <div className="w-8 h-8 rounded-lg bg-ecu-gold flex items-center justify-center shadow-sm">
+                      <i className="fas fa-robot text-ecu-purple text-sm"></i>
                     </div>
-                    <span className="text-[11px] font-black text-gray-400 uppercase tracking-widest">Handbook Insights</span>
+                    <span className="text-xs font-black text-gray-400 uppercase tracking-widest">Handbook Insights</span>
                   </div>
                   
                   <div className={`p-6 md:p-8 rounded-3xl rounded-tl-none border-2 shadow-sm relative group
@@ -212,33 +212,33 @@ const App: React.FC = () => {
                           <div className="w-2.5 h-2.5 bg-ecu-purple rounded-full animate-bounce [animation-delay:0.2s]"></div>
                           <div className="w-2.5 h-2.5 bg-ecu-purple rounded-full animate-bounce [animation-delay:0.4s]"></div>
                         </div>
-                        <span className="text-sm font-bold text-ecu-purple italic">Consulting policies...</span>
+                        <span className="text-base font-bold text-ecu-purple italic">Consulting policies...</span>
                       </div>
                     ) : (
                       <>
-                        <div className="prose prose-sm max-w-none text-gray-800 leading-relaxed">
+                        <div className="prose prose-base max-w-none text-gray-800 leading-relaxed">
                           <ReactMarkdown>{activeMessage.answer || ''}</ReactMarkdown>
                         </div>
                         
                         {activeMessage.status === 'success' && (
-                          <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
-                            <div className="flex items-center gap-4">
+                          <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
+                            <div className="flex items-center gap-6">
                               <button 
                                 onClick={() => handleFeedback(activeMessage.id, 'up')}
-                                className={`text-sm transition-colors ${activeMessage.feedback === 'up' ? 'text-green-600' : 'text-gray-300 hover:text-green-500'}`}
+                                className={`text-lg transition-colors ${activeMessage.feedback === 'up' ? 'text-green-600' : 'text-gray-300 hover:text-green-500'}`}
                               >
                                 <i className="fas fa-thumbs-up"></i>
                               </button>
                               <button 
                                 onClick={() => handleFeedback(activeMessage.id, 'down')}
-                                className={`text-sm transition-colors ${activeMessage.feedback === 'down' ? 'text-red-600' : 'text-gray-300 hover:text-red-500'}`}
+                                className={`text-lg transition-colors ${activeMessage.feedback === 'down' ? 'text-red-600' : 'text-gray-300 hover:text-red-500'}`}
                               >
                                 <i className="fas fa-thumbs-down"></i>
                               </button>
                             </div>
                             <button 
                               onClick={() => activeMessage.answer && copyToClipboard(activeMessage.answer)}
-                              className="text-[10px] font-bold text-ecu-purple/60 hover:text-ecu-purple uppercase tracking-tight flex items-center gap-1.5"
+                              className="text-xs font-bold text-ecu-purple/60 hover:text-ecu-purple uppercase tracking-tight flex items-center gap-2"
                             >
                               <i className="fas fa-copy"></i> Copy Answer
                             </button>
@@ -253,13 +253,13 @@ const App: React.FC = () => {
           </div>
 
           <div className="p-4 bg-white border-t border-slate-100">
-            <div className="max-w-3xl mx-auto flex items-end gap-3 bg-slate-100 rounded-3xl p-2 px-4 focus-within:bg-white focus-within:ring-4 focus-within:ring-ecu-purple/10 border-2 border-transparent focus-within:border-ecu-purple transition-all">
+            <div className="max-w-3xl mx-auto flex items-end gap-3 bg-slate-100 rounded-3xl p-3 px-5 focus-within:bg-white focus-within:ring-4 focus-within:ring-ecu-purple/10 border-2 border-transparent focus-within:border-ecu-purple transition-all">
               <textarea
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSend())}
                 placeholder="Ask about dorm policies, move-in, etc..."
-                className="flex-1 bg-transparent border-none focus:ring-0 text-sm py-3 px-1 resize-none max-h-40 min-h-[44px]"
+                className="flex-1 bg-transparent border-none focus:ring-0 text-base py-3 px-1 resize-none max-h-40 min-h-[44px]"
                 rows={1}
                 onInput={(e) => {
                   const t = e.target as HTMLTextAreaElement;
@@ -270,14 +270,14 @@ const App: React.FC = () => {
               <button 
                 onClick={() => handleSend()}
                 disabled={!inputValue.trim()}
-                className={`w-11 h-11 rounded-2xl flex items-center justify-center transition-all shadow-lg mb-1
+                className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all shadow-lg mb-1
                   ${inputValue.trim() ? 'bg-ecu-purple text-white hover:scale-105 active:scale-95' : 'bg-slate-300 text-slate-100 cursor-not-allowed'}
                 `}
               >
-                <i className="fas fa-paper-plane"></i>
+                <i className="fas fa-paper-plane text-lg"></i>
               </button>
             </div>
-            <p className="text-[9px] text-center text-gray-400 mt-2 font-medium">Verify important information with Campus Living staff.</p>
+            <p className="text-xs text-center text-gray-400 mt-3 font-medium">Verify important information with Campus Living staff.</p>
           </div>
         </main>
       </div>
