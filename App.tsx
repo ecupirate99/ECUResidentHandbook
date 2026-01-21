@@ -190,7 +190,7 @@ const App: React.FC = () => {
                           <div className="w-2.5 h-2.5 bg-ecu-purple rounded-full animate-bounce [animation-delay:0.2s]"></div>
                           <div className="w-2.5 h-2.5 bg-ecu-purple rounded-full animate-bounce [animation-delay:0.4s]"></div>
                         </div>
-                        <span className="text-base font-bold text-ecu-purple italic">Consulting policies...</span>
+                        <span className="text-base font-bold text-ecu-purple italic">Searching...</span>
                       </div>
                     ) : (
                       <>
