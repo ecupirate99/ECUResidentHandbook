@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ReactMarkdown from 'react-markdown';
 import { Message } from './types';
@@ -24,29 +24,7 @@ const App: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   
-  // Load history on mount
-  useEffect(() => {
-    const saved = localStorage.getItem('ecu_handbook_history');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved).map((m: any) => ({
-          ...m,
-          timestamp: new Date(m.timestamp)
-        }));
-        setMessages(parsed);
-        if (parsed.length > 0) setSelectedMessageId(parsed[0].id);
-      } catch (e) {
-        console.error("Failed to parse history", e);
-      }
-    }
-  }, []);
-
-  // Save history on change
-  useEffect(() => {
-    if (messages.length > 0) {
-      localStorage.setItem('ecu_handbook_history', JSON.stringify(messages));
-    }
-  }, [messages]);
+  // Local storage logic removed
 
   const activeMessage = messages.find(m => m.id === selectedMessageId);
 
@@ -99,8 +77,8 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full bg-slate-50 font-sans">
-      <header className="bg-ecu-purple text-white p-4 shadow-md flex items-center justify-between z-30">
+    <div className="flex flex-col h-[100dvh] bg-slate-50 font-sans">
+      <header className="bg-ecu-purple text-white p-4 shadow-md flex items-center justify-between z-30 shrink-0">
         <div className="flex items-center gap-3">
           <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 md:hidden">
             <i className={`fas ${isSidebarOpen ? 'fa-times' : 'fa-bars'}`}></i>
@@ -129,7 +107,7 @@ const App: React.FC = () => {
         `}>
           <div className="p-4 border-b bg-gray-50 flex items-center justify-between">
             <h2 className="text-[11px] font-black text-gray-400 uppercase tracking-widest">History</h2>
-            <button onClick={() => { setMessages([]); localStorage.removeItem('ecu_handbook_history'); }} className="text-[10px] text-red-500 font-bold hover:underline">Clear All</button>
+            <button onClick={() => setMessages([])} className="text-[10px] text-red-500 font-bold hover:underline">Clear All</button>
           </div>
           
           <div className="flex-1 overflow-y-auto custom-scrollbar">
@@ -186,7 +164,7 @@ const App: React.FC = () => {
                 </div>
               </div>
             ) : (
-              <div className="max-w-3xl mx-auto space-y-8 animate-in slide-in-from-bottom-4 duration-500">
+              <div className="max-w-3xl mx-auto space-y-8 animate-in slide-in-from-bottom-4 duration-500 pb-20">
                 <div className="flex justify-end">
                   <div className="bg-ecu-purple text-white px-6 py-4 rounded-2xl rounded-tr-none shadow-lg max-w-[85%]">
                     <p className="text-base font-semibold">{activeMessage.question}</p>
@@ -252,13 +230,13 @@ const App: React.FC = () => {
             )}
           </div>
 
-          <div className="p-2 md:p-4 bg-white border-t border-slate-100">
+          <div className="shrink-0 p-2 md:p-4 bg-white border-t border-slate-100 safe-area-pb">
             <div className="max-w-3xl mx-auto flex items-end gap-2 md:gap-3 bg-slate-100 rounded-3xl p-2 md:p-3 px-3 md:px-5 focus-within:bg-white focus-within:ring-4 focus-within:ring-ecu-purple/10 border-2 border-transparent focus-within:border-ecu-purple transition-all">
               <textarea
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && (e.preventDefault(), handleSend())}
-                placeholder="Ask about dorm policies, move-in, etc..."
+                placeholder="Ask about dorm policies..."
                 className="flex-1 bg-transparent border-none focus:ring-0 text-base py-2 md:py-3 px-1 resize-none max-h-40 min-h-[44px]"
                 rows={1}
                 onInput={(e) => {
